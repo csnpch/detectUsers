@@ -1,6 +1,6 @@
 #i/bin/bash
 
-# Get params username or read
+# Validate params/arguments
 if [[ -z $1 ]]; 
 then
     echo "Missing the argument(username) in position at 1, Try again!"
