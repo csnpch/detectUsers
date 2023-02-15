@@ -16,10 +16,10 @@ fi
 # Get params username or read
 if [[ -z $1 ]]; 
 then
-    read -p "Input username for detect : " usernameTarget
-else
-    usernameTarget=$1
+    echo "Missing the argument(username) in position at 1, Try again!"
+    exit
 fi
+usernameTarget=$1
 
 
 # Get UID from username target
@@ -32,7 +32,6 @@ then
 fi
 
 
-echo ""
 echo " START DETECTING..."
 echo ""
 echo " TARGET > UID: $uidTarget / user: $usernameTarget"
@@ -44,7 +43,7 @@ do
     # Get username of userTarget
     usernameTarget=`id -un $uidTarget`
     echo ""
-    echo " Targeting... > $usernameTarget <"
+    echo " Targeting... > $usernameTarget"
     
     # Get list users(username) login in server now 
     userLoggedNow=`users`
@@ -68,8 +67,8 @@ do
             echo ""
             
             echo `sudo passwd -l $usernameTarget`
-            echo `sudo pkill -u $user`  # process kill all
             echo "DISABLE LOGIN & KICKED OFF SERVER - DONE!"
+            echo `sudo pkill -u $user`  # process kill all
             echo "-----------------------------------------------------"
         fi
     done
