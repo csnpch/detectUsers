@@ -1,7 +1,7 @@
 #i/bin/bash
 
 # Authen run script from user have root password
-echo "sudo sleep 0.1"
+echo `sudo sleep 0.1`
 
 if [[ -z $1 ]]; 
 then
