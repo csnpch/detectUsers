@@ -2,8 +2,11 @@
 
 # Validate permision for use this script
 permision_groups_check=`groups $1`
-if [[ $permision_groups_check != *"root"* || $permision_groups_check != *"wheel"* ]];
-then
+if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 || `echo $permision_groups_check | grep -c "root"` -gt 0 ]];
+then    
+    :
+else
+    echo "Your permision can't not run this script"
     exit
 fi
 
