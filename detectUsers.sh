@@ -33,40 +33,44 @@ fi
 
 
 echo ""
-echo " START DETECT..."
+echo " START DETECTING..."
 echo ""
 echo " TARGET > UID: $uidTarget / user: $usernameTarget"
 
 
-while true
+while true;
 do
-
-    # Get list users(username) login in server now 
-    userLoggedNow=`users`
-    echo ""
-    echo " Timestamp : $(date)"
-    echo " List user logged now : [ ${userLoggedNow} ]"
     
     # Get username of userTarget
     usernameTarget=`id -un $uidTarget`
+    echo ""
     echo " Targeting... > $usernameTarget <"
+    
+    # Get list users(username) login in server now 
+    userLoggedNow=`users`
+    echo " Timestamp : $(date)"
+    echo " List user logged now : [ ${userLoggedNow} ]"
+        
     sleep 2
 
+    # split string by 1 space "user1 user2" -> ["user1", "user2"]
     users=(${userLoggedNow// / })
     for user in ${users[@]}
     do
+        # If some user login now is equal target
         if [[ $user == $usernameTarget ]];
         then
+            echo ""
+            echo "-----------------------------------------------------"
             echo ""
             echo " !! -------- FOUND USER TARGET : $user"
             echo " !! -------- LOGIN ON : $(date)"
             echo ""
             
-            echo " LOGIN IS DISABLE - DONE!"
-            echo `passwd -l $usernameTarget`
-            
-            echo " KICKED OFF SERVER - DONE!"
+            echo `sudo passwd -l $usernameTarget`
             echo `sudo pkill -u $user`  # process kill all
+            echo "DISABLE LOGIN & KICKED OFF SERVER - DONE!"
+            echo "-----------------------------------------------------"
         fi
     done
 
