@@ -1,5 +1,8 @@
 #i/bin/bash
 
+# Authen run script from user have root password
+echo "sudo sleep 0.1"
+
 if [[ -z $1 ]]; 
 then
     read -p "Input username for detect : " usernameTarget
@@ -25,7 +28,7 @@ do
     
     # get username of userTaret
     usernameTarget=`id -un $uidTarget`
-    echo " Targeting... user: $usernameTarget"
+    echo " Targeting... $usernameTarget"
 
     userLoggedNow=`users`
 
@@ -40,7 +43,9 @@ do
         if [[ $user == $usernameTarget ]];
         then
             echo " !!>>> FOUND USER TARGET : $user"
-            echo `ls -al`
+            echo `passwd -l $usernameTarget`
+            echo " Login Disabled !"
+            echo " Kicked !"
         fi
     done
 
