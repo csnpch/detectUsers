@@ -1,14 +1,15 @@
 #i/bin/bash
 
 # Validate permision for use this script
-permision_groups_check=`groups $1`
+permision_groups_check=`groups`
 if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 || `echo $permision_groups_check | grep -c "root"` -gt 0 ]];
-then    
-    :
+then  :
+    echo `sudo -v`
 else
-    echo "Your permision can't not run this script"
+    echo "Your permission can't not run this script"
     exit
 fi
+
 
 # Get params username or read
 if [[ -z $1 ]]; 
