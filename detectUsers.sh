@@ -28,7 +28,7 @@ do
     echo " List user logged now : [ ${userLoggedNow} ]"
     # get username of userTarget
     usernameTarget=`id -un $uidTarget`
-    echo " Targeting... $usernameTarget"
+    echo " Targeting... > $usernameTarget <"
     echo ""
     sleep 2
 
