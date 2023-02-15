@@ -24,7 +24,6 @@ while true
 do
     
     userLoggedNow=`users`
-    echo ""
     echo " Timestamp : $(date)"
     echo " List user logged now : [ ${userLoggedNow} ]"
     # get username of userTarget
@@ -38,11 +37,13 @@ do
     do
         if [[ $user == $usernameTarget ]];
         then
+            echo ""
+            echo `sudo pkill -u $user`
             echo " !!>>> FOUND USER TARGET : $user"
             # echo `passwd -l $usernameTarget`
             # echo " Login Disabled !"
-            echo `pkill -u $user`
             echo " Kicked !"
+            echo ""
         fi
     done
 
