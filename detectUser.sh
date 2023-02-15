@@ -25,23 +25,24 @@ do
     
     # get username of userTaret
     usernameTarget=`id -un $uidTarget`
-    echo "Username targeting... : $usernameTarget"
+    echo " Targeting... user: $usernameTarget"
 
     userLoggedNow=`users`
-    users=(${userLoggedNow// / })
 
+    echo " List user logged now : [ ${userLoggedNow} ]"
+    echo " Timestamp : $(date)"
+    echo ""
+    sleep 2
+
+    users=(${userLoggedNow// / })
     for user in ${users[@]}
     do
         if [[ $user == $usernameTarget ]];
         then
-            echo " ! >>> FOUND USER TARGET : $user"
+            echo " !!>>> FOUND USER TARGET : $user"
+            echo `ls -al`
         fi
     done
-
-    echo "User logged now : [ ${userLoggedNow} ]"
-    echo "Timestamp : $(date)"
-    echo ""
-    sleep 2
 
 done
 
