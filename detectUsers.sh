@@ -51,8 +51,6 @@ do
     echo " Timestamp : $(date)"
     echo " List user logged now : [ ${userLoggedNow} ]"
         
-    sleep 2
-
     # split string by 1 space "user1 user2" -> ["user1", "user2"]
     users=(${userLoggedNow// / })
     for user in ${users[@]}
@@ -73,6 +71,8 @@ do
             echo "-----------------------------------------------------"
         fi
     done
+
+    sleep 2  # on production should be 10s
 
 done
 
