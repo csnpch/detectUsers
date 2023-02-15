@@ -11,9 +11,9 @@ usernameTarget=$1
 
 
 # Validate permision for use this script
-permision_groups_check=`groups`
-if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 
-|| `echo $permision_groups_check | grep -c "root"` -gt 0 ]];
+permission_groups_check=`groups`
+if [[ `echo $permission_groups_check | grep -c "wheel"` -gt 0 
+|| `echo $permission_groups_check | grep -c "root"` -gt 0 ]];
 then 
     # Allow permision sudo/root for commands
     echo `sudo -v`
