@@ -41,7 +41,7 @@ do
             echo `sudo pkill -u $user`
             echo " !!>>> FOUND USER TARGET : $user"
             # echo `passwd -l $usernameTarget`
-            # echo " Login Disabled !"
+            echo " Login Disabled !"
             echo " Kicked !"
             echo ""
         fi
