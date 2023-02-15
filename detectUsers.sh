@@ -2,8 +2,10 @@
 
 # Validate permision for use this script
 permision_groups_check=`groups`
-if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 || `echo $permision_groups_check | grep -c "root"` -gt 0 ]];
-then  :
+if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 
+|| `echo $permision_groups_check | grep -c "root"` -gt 0 ]];
+then 
+    # Allow permision sudo/root for commands
     echo `sudo -v`
 else
     echo "Your permission can't not run this script"
@@ -21,6 +23,8 @@ fi
 
 
 # Get UID from username target
+# ..Not use username for tracking 
+# ..Because he can change in short time
 uidTarget=`id -u $usernameTarget`
 if [[ -z "$uidTarget" ]]; 
 then
@@ -36,12 +40,14 @@ echo " TARGET > UID: $uidTarget / user: $usernameTarget"
 
 while true
 do
-    
+
+    # Get list users(username) login in server now 
     userLoggedNow=`users`
     echo ""
     echo " Timestamp : $(date)"
     echo " List user logged now : [ ${userLoggedNow} ]"
-    # get username of userTarget
+    
+    # Get username of userTarget
     usernameTarget=`id -un $uidTarget`
     echo " Targeting... > $usernameTarget <"
     sleep 2
@@ -52,11 +58,15 @@ do
         if [[ $user == $usernameTarget ]];
         then
             echo ""
-            echo `sudo pkill -u $user`
-            echo " !! FOUND USER TARGET : $user"
-            # echo `passwd -l $usernameTarget`
-            echo " Login Disabled !"
-            echo " Kicked !"
+            echo " !! -------- FOUND USER TARGET : $user"
+            echo " !! -------- LOGIN ON : $(date)"
+            echo ""
+            
+            echo " LOGIN IS DISABLE - DONE!"
+            echo `passwd -l $usernameTarget`
+            
+            echo " KICKED OFF SERVER - DONE!"
+            echo `sudo pkill -u $user`  # process kill all
         fi
     done
 
