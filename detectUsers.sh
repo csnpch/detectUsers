@@ -1,5 +1,15 @@
 #i/bin/bash
 
+# Get params username or read
+if [[ -z $1 ]]; 
+then
+    echo "Missing the argument(username) in position at 1, Try again!"
+    echo ""
+    exit
+fi
+usernameTarget=$1
+
+
 # Validate permision for use this script
 permision_groups_check=`groups`
 if [[ `echo $permision_groups_check | grep -c "wheel"` -gt 0 
@@ -11,15 +21,6 @@ else
     echo "Your permission can't not run this script"
     exit
 fi
-
-
-# Get params username or read
-if [[ -z $1 ]]; 
-then
-    echo "Missing the argument(username) in position at 1, Try again!"
-    exit
-fi
-usernameTarget=$1
 
 
 # Get UID from username target
